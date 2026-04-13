@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_grama_repeat">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivIconeFome"
+                android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/milho"
+            android:scaleType="fitCenter"
+            android:contentDescription="Ícone de Fome" />
+
+            <TextView
+                android:id="@+id/tvFome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+            android:text="100"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="end|center_vertical">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/heart"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/tvFelicidade"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="100"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/areaPato"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/toolbar"
+        android:layout_below="@id/header">
+
+        <com.example.mobilehub.PatoView
+            android:id="@+id/patoAnimado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <Button
+            android:id="@+id/btnReiniciar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:text="RENASCER"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/toolbar"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:weightSum="4">
+
+        <ImageView
+            android:id="@+id/itemMilho"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="15dp"
+            android:layout_marginStart="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/milho"
+            android:contentDescription="Milho" />
+
+        <ImageView
+            android:id="@+id/itemCarinho"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+
+        android:padding="15dp"
+            android:layout_marginEnd="5dp"
+
+        android:src="@drawable/hand"
+        android:contentDescription="Hand" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

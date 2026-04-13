@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp">
+
+    <Button
+        android:id="@+id/btn_voltar_hub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&lt; Voltar"
+        style="@style/PetCalcButton"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtResultado"
+        style="@style/CalculatorDisplay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="0"
+        android:textSize="48sp"
+        android:padding="16dp"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/gridButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <include layout="@layout/layout_theme_toggle" />
+
+    <GridLayout
+        android:id="@+id/gridButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rowCount="5"
+        android:columnCount="4"
+        app:layout_constraintVertical_weight="2"
+        app:layout_constraintTop_toBottomOf="@+id/txtResultado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Linha 1 -->
+        <ImageButton
+            android:id="@+id/btnClear"
+            style="@style/IconButton"
+            android:src="@drawable/ic_clear"
+            android:contentDescription="@string/clear" />
+        <ImageButton
+            android:id="@+id/btnBackspace"
+            style="@style/IconButton"
+            android:src="@drawable/ic_backspace"
+            android:contentDescription="@string/backspace" />
+        <ImageButton
+            android:id="@+id/btnDividir"
+            style="@style/IconButton"
+            android:src="@drawable/ic_divide"
+            android:contentDescription="@string/divide" />
+        <ImageButton
+            android:id="@+id/btnMultiplicar"
+            style="@style/IconButton"
+            android:src="@drawable/ic_mult"
+            android:contentDescription="@string/mult" />
+
+        <!-- Linha 2 -->
+        <ImageButton
+            android:id="@+id/btn7"
+            style="@style/IconButton"
+            android:src="@drawable/ic_7"
+            android:contentDescription="@string/seven" />
+        <ImageButton
+            android:id="@+id/btn8"
+            style="@style/IconButton"
+            android:src="@drawable/ic_8"
+            android:contentDescription="@string/eight" />
+        <ImageButton
+            android:id="@+id/btn9"
+            style="@style/IconButton"
+            android:src="@drawable/ic_9"
+            android:contentDescription="@string/nine" />
+        <ImageButton
+            android:id="@+id/btnSubtrair"
+            style="@style/IconButton"
+            android:src="@drawable/ic_minus"
+            android:contentDescription="@string/minus" />
+
+        <!-- Linha 3 -->
+        <ImageButton
+            android:id="@+id/btn4"
+            style="@style/IconButton"
+            android:src="@drawable/ic_4"
+            android:contentDescription="@string/four" />
+        <ImageButton
+            android:id="@+id/btn5"
+            style="@style/IconButton"
+            android:src="@drawable/ic_5"
+            android:contentDescription="@string/five" />
+        <ImageButton
+            android:id="@+id/btn6"
+            style="@style/IconButton"
+            android:src="@drawable/ic_6"
+            android:contentDescription="@string/six" />
+        <ImageButton
+            android:id="@+id/btnSomar"
+            style="@style/IconButton"
+            android:src="@drawable/ic_sum"
+            android:contentDescription="@string/sum" />
+        <!-- Linha 4 -->
+        <ImageButton
+            android:id="@+id/btn1"
+            style="@style/IconButton"
+            android:src="@drawable/ic_1"
+            android:contentDescription="@string/one" />
+        <ImageButton
+            android:id="@+id/btn2"
+            style="@style/IconButton"
+            android:src="@drawable/ic_2"
+            android:contentDescription="@string/two" />
+        <ImageButton
+            android:id="@+id/btn3"
+            style="@style/IconButton"
+            android:src="@drawable/ic_3"
+            android:contentDescription="@string/three" />
+        <ImageButton
+            android:id="@+id/btnIgual"
+            style="@style/IconButton"
+            android:src="@drawable/ic_equals"
+            android:contentDescription="@string/equals" />
+
+        <!-- Linha 5 -->
+        <ImageButton
+            android:id="@+id/btn0"
+            style="@style/IconButton"
+            android:src="@drawable/ic_0"
+            android:contentDescription="@string/zero" />
+        <ImageButton
+            android:id="@+id/btnPonto"
+            style="@style/IconButton"
+            android:src="@drawable/ic_dot"
+            android:contentDescription="@string/dot" />
+
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

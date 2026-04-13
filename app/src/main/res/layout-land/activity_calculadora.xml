@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_land"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp">
+
+    <TextView
+        android:id="@+id/txtResultado"
+        style="@style/CalculatorDisplay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="12dp"
+        android:text="0"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/gridButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1" />
+
+    <include layout="@layout/layout_theme_toggle" />
+
+    <GridLayout
+        android:id="@+id/gridButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:rowCount="5"
+        android:columnCount="6"
+        app:layout_constraintVertical_weight="2"
+        app:layout_constraintTop_toBottomOf="@+id/txtResultado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnSin" style="@style/PetCalcButton" android:text="sin" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnCos" style="@style/PetCalcButton" android:text="cos" />
+        <ImageButton
+            android:id="@+id/btnClear"
+            style="@style/IconButton"
+            android:src="@drawable/ic_clear"
+            android:contentDescription="@string/clear" />
+        <ImageButton
+            android:id="@+id/btnBackspace"
+            style="@style/IconButton"
+            android:src="@drawable/ic_backspace"
+            android:contentDescription="@string/backspace" />
+        <ImageButton
+            android:id="@+id/btnPower"
+            style="@style/IconButton"
+            android:src="@drawable/ic_pow"
+            android:contentDescription="@string/power" />
+        <ImageButton
+            android:id="@+id/btnDividir"
+            style="@style/IconButton"
+            android:src="@drawable/ic_divide"
+            android:contentDescription="@string/divide" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnTan" style="@style/PetCalcButton" android:text="tan" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnSqrt" style="@style/PetCalcButton" android:text="√" />
+        <ImageButton
+            android:id="@+id/btn7"
+            style="@style/IconButton"
+            android:src="@drawable/ic_7"
+            android:contentDescription="@string/seven" />
+        <ImageButton
+            android:id="@+id/btn8"
+            style="@style/IconButton"
+            android:src="@drawable/ic_8"
+            android:contentDescription="@string/eight" />
+        <ImageButton
+            android:id="@+id/btn9"
+            style="@style/IconButton"
+            android:src="@drawable/ic_9"
+            android:contentDescription="@string/nine" />
+        <ImageButton
+            android:id="@+id/btnMultiplicar"
+            style="@style/IconButton"
+            android:src="@drawable/ic_mult"
+            android:contentDescription="@string/mult" />
+
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnLn" style="@style/PetCalcButton" android:text="ln" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnLog" style="@style/PetCalcButton" android:text="log" />
+        <ImageButton
+            android:id="@+id/btn4"
+            style="@style/IconButton"
+            android:src="@drawable/ic_4"
+            android:contentDescription="@string/four" />
+        <ImageButton
+            android:id="@+id/btn5"
+            style="@style/IconButton"
+            android:src="@drawable/ic_5"
+            android:contentDescription="@string/five" />
+        <ImageButton
+            android:id="@+id/btn6"
+            style="@style/IconButton"
+            android:src="@drawable/ic_6"
+            android:contentDescription="@string/six" />
+        <ImageButton
+            android:id="@+id/btnSubtrair"
+            style="@style/IconButton"
+            android:src="@drawable/ic_minus"
+            android:contentDescription="@string/minus" />
+
+        <com.google.android.material.button.MaterialButton android:id="@+id/btnPi" style="@style/PetCalcButton" android:text="π" />
+        <com.google.android.material.button.MaterialButton style="@style/PetCalcButton" android:visibility="invisible" />
+        <ImageButton
+            android:id="@+id/btn1"
+            style="@style/IconButton"
+            android:src="@drawable/ic_1"
+            android:contentDescription="@string/one" />
+        <ImageButton
+            android:id="@+id/btn2"
+            style="@style/IconButton"
+            android:src="@drawable/ic_2"
+            android:contentDescription="@string/two" />
+        <ImageButton
+            android:id="@+id/btn3"
+            style="@style/IconButton"
+            android:src="@drawable/ic_3"
+            android:contentDescription="@string/three" />
+        <ImageButton
+            android:id="@+id/btnSomar"
+            style="@style/IconButton"
+            android:src="@drawable/ic_sum"
+            android:contentDescription="@string/sum" />
+
+        <com.google.android.material.button.MaterialButton style="@style/PetCalcButton" android:visibility="invisible" />
+        <com.google.android.material.button.MaterialButton style="@style/PetCalcButton" android:visibility="invisible" />
+        <ImageButton
+            android:id="@+id/btn0"
+            style="@style/IconButton"
+            android:src="@drawable/ic_0"
+            android:contentDescription="@string/zero" />
+        <ImageButton
+            android:id="@+id/btnPonto"
+            style="@style/IconButton"
+            android:src="@drawable/ic_dot"
+            android:contentDescription="@string/dot" />
+        <com.google.android.material.button.MaterialButton style="@style/PetCalcButton" android:visibility="invisible" />
+        <ImageButton
+            android:id="@+id/btnIgual"
+            style="@style/IconButton"
+            android:src="@drawable/ic_equals"
+            android:contentDescription="@string/equals" />
+
+
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
