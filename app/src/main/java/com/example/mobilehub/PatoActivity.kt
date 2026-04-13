@@ -95,11 +95,17 @@ class PatoActivity : AppCompatActivity() {
 
         btnReiniciar.setOnClickListener { reiniciarPatinho() }
 
+        findViewById<Button>(R.id.btn_voltar_hub).setOnClickListener {
+            finish()
+        }
+
         iniciarSonsAleatorios()
 
         iniciarCicloVida()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        renderizar()
     }
 
     private fun iniciarCicloVida() {
