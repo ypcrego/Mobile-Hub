@@ -266,5 +266,11 @@ class PatoActivity : AppCompatActivity() {
         conjuntoAnim.start()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+        handlerSom.removeCallbacksAndMessages(null)
+    }
+
 
 }
