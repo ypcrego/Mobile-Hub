@@ -27,13 +27,14 @@ class CalculadoraActivity : AppCompatActivity() {
     private var operand: Double? = null
     private var pendingOp: String? = null
 
-    private val somViewModel: SomViewModel by viewModels()
+    private lateinit var audioManager: AudioManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calculadora)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        audioManager = DefaultAudioManager.getInstance(this)
 
         // TextView de display
         tvDisplay = findViewById(R.id.txtResultado)
@@ -102,13 +103,13 @@ class CalculadoraActivity : AppCompatActivity() {
                     Configuration.UI_MODE_NIGHT_YES
 
             if (isNightMode) {
-                somViewModel.playDaySound()
+                audioManager.playSound(EnumSound.CAT_DAY)
 
                 AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_NO
                 )
             } else {
-                somViewModel.playNightSound()
+                audioManager.playSound(EnumSound.CAT_NIGHT)
 
                 AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_YES
@@ -245,6 +246,5 @@ class CalculadoraActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }

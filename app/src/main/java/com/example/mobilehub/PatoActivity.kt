@@ -2,7 +2,6 @@ package com.example.mobilehub
 
 import android.content.ClipData
 import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 
 class PatoActivity : AppCompatActivity() {
+
+    private lateinit var audioManager: AudioManager
 
     private var nivelFome = 100
     private var nivelFelicidade = 100
@@ -41,6 +42,7 @@ class PatoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pato)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        audioManager = DefaultAudioManager.getInstance(this)
 
         tvFome = findViewById(R.id.tvFome)
         tvFelicidade = findViewById(R.id.tvFelicidade)
@@ -71,7 +73,7 @@ class PatoActivity : AppCompatActivity() {
                     val itemArrastado = event.clipDescription.label.toString()
 
                     if (estaVivo) {
-                        tocarSom(R.raw.quack_drop)
+                        audioManager.playSound(EnumSound.QUACK_DROP)
 
                         if (itemArrastado == "itemMilho") {
                             atualizarAtributos(15, 0) // Sobe Fome
@@ -185,22 +187,12 @@ class PatoActivity : AppCompatActivity() {
         iniciarSonsAleatorios()
     }
 
-    private fun tocarSom(arquivoDeSom: Int) {
-        try {
-            val mediaPlayer = MediaPlayer.create(this, arquivoDeSom)
-            mediaPlayer.setOnCompletionListener { it.release() }
-            mediaPlayer.start()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
     private fun iniciarSonsAleatorios() {
         handlerSom.removeCallbacksAndMessages(null)
         handlerSom.postDelayed(object : Runnable {
             override fun run() {
                 if (estaVivo && !isArrastando) {
-                    tocarSom(R.raw.random_quack)
+                    audioManager.playSound(EnumSound.RANDOM_QUACK)
                 }
 
                 val tempoAleatorio = (10000..25000).random().toLong()

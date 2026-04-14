@@ -12,12 +12,13 @@ import kotlin.random.Random
 class PomodoroActivity : AppCompatActivity() {
 
     private val viewModel: PomodoroViewModel by viewModels()
-    private lateinit var soundManager: PomodoroSoundManager
 
     private lateinit var tvTimer: TextView
     private lateinit var btnToggle: Button
     private lateinit var btnReset: Button
     private lateinit var frogContainer: FrameLayout
+
+    private lateinit var audioManager: AudioManager
 
     // all spritesheets
     private fun getFrogSprites(): List<Int> {
@@ -35,7 +36,7 @@ class PomodoroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pomodoro)
 
-        soundManager = PomodoroSoundManager(this)
+        audioManager = DefaultAudioManager.getInstance(this)
 
         tvTimer = findViewById(R.id.tvTimer)
         btnToggle = findViewById(R.id.btnToggleTimer)
@@ -60,11 +61,19 @@ class PomodoroActivity : AppCompatActivity() {
         }
 
         viewModel.croakEvent.observe(this) {
-            soundManager.playFrogSpawnSound()
+            val frogQuantity = frogContainer.childCount
+
+            for (i in 0 until frogQuantity) {
+                val delayMs = kotlin.random.Random.nextLong(0, 1000)
+
+                frogContainer.postDelayed({
+                    audioManager.playSound(EnumSound.FROG_CROAK)
+                }, delayMs)
+            }
         }
 
         viewModel.alarmEvent.observe(this) {
-            soundManager.playFinalAlarm()
+            audioManager.playSound(EnumSound.ALARM_DROP)
         }
     }
 
@@ -72,7 +81,7 @@ class PomodoroActivity : AppCompatActivity() {
         btnToggle.setOnClickListener { viewModel.toggleTimer() }
         btnReset.setOnClickListener {
             viewModel.resetTimer()
-            frogContainer.removeAllViews() // Limpa os sapos da tela
+            frogContainer.removeAllViews() // Remove frogs from screen
         }
     }
 
@@ -96,8 +105,4 @@ class PomodoroActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        soundManager.release()
-    }
 }
