@@ -1,12 +1,16 @@
 package com.example.mobilehub
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import kotlin.random.Random
 
 class PomodoroActivity : AppCompatActivity() {
@@ -17,6 +21,7 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var btnToggle: Button
     private lateinit var btnReset: Button
     private lateinit var frogContainer: FrameLayout
+    private lateinit var rootLayout: ConstraintLayout
 
     private lateinit var audioManager: AudioManager
 
@@ -38,10 +43,34 @@ class PomodoroActivity : AppCompatActivity() {
 
         audioManager = DefaultAudioManager.getInstance(this)
 
+        rootLayout = findViewById(R.id.pomodoro_root)
         tvTimer = findViewById(R.id.tvTimer)
         btnToggle = findViewById(R.id.btnToggleTimer)
         btnReset = findViewById(R.id.btnResetTimer)
         frogContainer = findViewById(R.id.frogContainer)
+
+        // TODO frog
+        val isNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        if (isNightMode) {
+            rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
+        } else {
+            rootLayout.setBackgroundResource(R.drawable.bg_swamp)
+        }
+
+        // TODO frog
+        findViewById<View>(R.id.btnTema)?.setOnClickListener {
+            if (isNightMode) {
+                audioManager.playSound(EnumSound.CAT_DAY)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else {
+                audioManager.playSound(EnumSound.CAT_NIGHT)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
+
+        findViewById<Button>(R.id.btn_voltar_hub).setOnClickListener {
+            finish()
+        }
 
         setupObservers()
         setupListeners()
