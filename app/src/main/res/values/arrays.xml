@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="frog_sprites_array">
+        <item>@drawable/frog_green_spritesheet</item>
+        <item>@drawable/frog_blue_spritesheet</item>
+        <item>@drawable/frog_clown_spritesheet</item>
+        <item>@drawable/frog_viking_spritesheet</item>
+        <item>@drawable/frog_brown_spritesheet</item>
+        <item>@drawable/frog_cowboy_spritesheet</item>
+        <item>@drawable/frog_funnyglasses_spritesheet</item>
+        <item>@drawable/frog_gameboy_bw_spritesheet</item>
+        <item>@drawable/frog_gameboy_green_spritesheet</item>
+        <item>@drawable/frog_pirate_spritesheet</item>
+        <item>@drawable/frog_purple_spritesheet</item>
+        <item>@drawable/frog_tan_pirate_spritesheet</item>
+    </array>
+</resources>

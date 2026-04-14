@@ -20,12 +20,16 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var frogContainer: FrameLayout
 
     // all spritesheets
-    private val frogSprites = listOf(
-        R.drawable.frog_green_spritesheet,
-        R.drawable.frog_blue_spritesheet,
-        R.drawable.frog_clown_spritesheet,
-        R.drawable.frog_viking_spritesheet
-    )
+    private fun getFrogSprites(): List<Int> {
+        val typedArray = resources.obtainTypedArray(R.array.frog_sprites_array)
+        val list = mutableListOf<Int>()
+        for (i in 0 until typedArray.length()) {
+            val resId = typedArray.getResourceId(i, -1)
+            if (resId != -1) list.add(resId)
+        }
+        typedArray.recycle()
+        return list
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,22 +77,21 @@ class PomodoroActivity : AppCompatActivity() {
     }
 
     private fun spawnRandomFrog() {
-        val randomSprite = frogSprites.random()
+        val allFrogs = getFrogSprites()
+        if (allFrogs.isEmpty()) return
 
+        val randomSprite = allFrogs.random()
         val frogView = FrogView(this, randomSprite)
 
-        // Sorteia uma posição inicial
         frogContainer.post {
-            // Calculamos um offset inicial para o sapo não nascer cortado
-            frogView.sapoX = Random.nextInt(0, frogContainer.width / 2).toFloat()
-            frogView.sapoY = Random.nextInt(0, frogContainer.height / 2).toFloat()
+            frogView.posX = Random.nextInt(0, (frogContainer.width / 2).coerceAtLeast(1)).toFloat()
+            frogView.posY = Random.nextInt(0, (frogContainer.height / 2).coerceAtLeast(1)).toFloat()
 
             val layoutParams = FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
             frogView.layoutParams = layoutParams
-
             frogContainer.addView(frogView)
         }
     }

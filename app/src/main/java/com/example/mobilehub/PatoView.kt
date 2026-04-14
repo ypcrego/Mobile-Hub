@@ -3,221 +3,87 @@ package com.example.mobilehub
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.graphics.Rect
 import android.util.AttributeSet
-import android.view.View
-import android.graphics.Paint
 
-class PatoView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
-
-    private var spritesheet: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.ducky_2_spritesheet)
-
-    // Configurações da Spritesheet
-    private val numColunas = 6
-    private val numLinhas = 4
-    private val linhaAndar = 1
+class PatoView(context: Context, attrs: AttributeSet?) : BaseSpriteView(context, attrs) {
 
 
-    private var estaEmPerigo = false
-    private val patoPaint = Paint()
+    override val naturalmenteOlhaParaDireita = true
+    private val totalRows = 4
+    private val totalCols = 6
+    private val scaleFactor = 3
 
-    // Dimensões de um único frame
-    private val larguraFrame = spritesheet.width / numColunas
-    private val alturaFrame = spritesheet.height / numLinhas
+    private lateinit var walkFrames: List<Bitmap>
+    private lateinit var deathFrame: Bitmap
 
-    // Estado da animação
-    private var frameAtual = 0
-    private var tempoUltimoFrame: Long = 0
-    private var intervaloFrameMs = 150 // Velocidade da animação
+    init {
+        val sheet = BitmapFactory.decodeResource(resources, R.drawable.ducky_2_spritesheet)
+        val helper = SpriteSheetHelper(sheet, totalRows, totalCols)
 
-    // Estado do movimento
-    private var patoX = 100f
+        walkFrames = helper.getFramesFromRow(1, 0 until totalCols)
 
-    var estaParado = false
-    private val fatorEscala = 3
-    private var patoY = 100f
-    private var velocidadeX = 5f
+        val deathFrames = helper.getFramesFromRow(3, 1..1)
+        deathFrame = deathFrames[0]
 
-    private var velocidadeY = 5f
-    private var indoParaDireita = true
+        this.frames = walkFrames
 
-    private val linhaMorto = 3
-    private val frameMorto = 1
+        val frameWidth = sheet.width / totalCols
+        val frameHeight = sheet.height / totalRows
 
-    var estaVivo: Boolean = true
+        this.larguraFrameReal = frameWidth * scaleFactor
+        this.alturaFrameReal = frameHeight * scaleFactor
 
-    fun getXAtual(): Float = patoX
-    fun getYAtual(): Float = patoY
-
-
-    private val srcRect = Rect()
-    private val dstRect = Rect()
-
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-
-        // 1. Atualiza o movimento e a animação APENAS se estiver VIVO
-        if (estaVivo) {
-
-            if (!estaParado) {
-                atualizarPosicaoEPessoa()
-            }
-
-
-            val left = frameAtual * larguraFrame
-            val top = linhaAndar * alturaFrame
-            val right = left + larguraFrame
-            val bottom = top + alturaFrame
-
-            srcRect.set(left, top, right, bottom)
-        } else {
-            val linhaMorto = 3
-            val frameMorto = 1
-
-            val left = frameMorto * larguraFrame
-            val top = linhaMorto * alturaFrame
-            val right = left + larguraFrame
-            val bottom = top + alturaFrame
-
-            srcRect.set(left, top, right, bottom)
-        }
-
-
-        val fatorEscala = 3 // Aumenta o tamanho do sprite
-        val desenhoLeft = patoX.toInt()
-        val desenhoTop = patoY.toInt()
-        val desenhoRight = desenhoLeft + (larguraFrame * fatorEscala)
-        val desenhoBottom = desenhoTop + (alturaFrame * fatorEscala)
-
-        dstRect.set(desenhoLeft, desenhoTop, desenhoRight, desenhoBottom)
-
-        //espelhamento
-        canvas.save()
-
-        if (!indoParaDireita) {
-            canvas.scale(-1f, 1f, dstRect.exactCenterX(), dstRect.exactCenterY())
-        }
-
-        canvas.drawBitmap(spritesheet, srcRect, dstRect, patoPaint)
-
-        canvas.restore() // Restaura a tela para o normal
-
-        // 4. O LOOP DA ANIMAÇÃO
-        if (estaVivo) {
-            invalidate()
-        }
+        // Posição e velocidade iniciais
+        this.posX = 100f
+        this.posY = 100f
+        this.velX = 5f
+        this.velY = 5f
+        this.intervaloFrameMs = 150L
     }
 
-    private fun atualizarPosicaoEPessoa() {
-        val tempoAtual = System.currentTimeMillis()
+    fun setModoPerigo() {
+        val matrix = ColorMatrix()
+        matrix.setSaturation(0f)
+        this.paint.colorFilter = ColorMatrixColorFilter(matrix)
+        this.intervaloFrameMs = 300L
+        this.velX = if (velX > 0) 2f else -2f
+        this.velY = if (velY > 0) 2f else -2f
+    }
 
-        // 1. Lógica da Animação
-        if (tempoAtual > tempoUltimoFrame + intervaloFrameMs) {
-            frameAtual++
-            if (frameAtual >= numColunas) {
-                frameAtual = 0
-            }
-            tempoUltimoFrame = tempoAtual
-        }
-
-
-        if (width == 0 || height == 0) return
-
-
-        val fatorEscala = 3
-        val larguraReal = larguraFrame * fatorEscala
-        val alturaReal = alturaFrame * fatorEscala
-
-        // mov diagonal
-        patoX += velocidadeX
-        patoY += velocidadeY
-
-        // 4. Verificação de Colisões (Bater nas paredes)
-
-        // Parede da Direita
-        if (patoX + larguraReal > width) {
-            patoX = (width - larguraReal).toFloat()
-            velocidadeX = -Math.abs(velocidadeX) // Inverte a velocidade X (vai pra esquerda)
-            indoParaDireita = false
-        }
-        // Parede da Esquerda
-        else if (patoX < 0) {
-            patoX = 0f
-            velocidadeX = Math.abs(velocidadeX) // Inverte a velocidade X (vai pra direita)
-            indoParaDireita = true
-        }
-
-        // Teto (Em cima)
-        if (patoY < 0) {
-            patoY = 0f
-            velocidadeY = Math.abs(velocidadeY) // Inverte a velocidade Y (vai pra baixo)
-        }
-        // Chão (Embaixo)
-        else if (patoY + alturaReal > height) {
-            patoY = (height - alturaReal).toFloat()
-            velocidadeY = -Math.abs(velocidadeY) // Inverte a velocidade Y (vai pra cima)
-        }
+    fun setModoNormal() {
+        this.paint.colorFilter = null
+        this.intervaloFrameMs = 150L
+        this.velX = if (velX > 0) 5f else -5f
+        this.velY = if (velY > 0) 5f else -5f
     }
 
     fun notificarMorte() {
-        estaVivo = false
+        this.estaVivo = false
+        this.frames = listOf(deathFrame) // Trava a animação no frame de morte
         invalidate()
     }
 
     fun notificarRenascer() {
-        estaVivo = true
-        patoX = 100f
-        patoY = 100f
+        this.estaVivo = true
+        this.frames = walkFrames
+        this.posX = 100f
+        this.posY = 100f
         invalidate()
     }
+
     fun pausar() {
-        estaParado = true
+        this.velX = 0f
+        this.velY = 0f
     }
 
     fun retomar() {
-        estaParado = false
-        invalidate()
+        this.velX = if (indoParaDireita) 5f else -5f
+        this.velY = 5f
     }
 
-    fun getLarguraEscalada(): Float = (larguraFrame * fatorEscala).toFloat()
-
-    fun getCentroXAtual(): Float = patoX + (getLarguraEscalada() / 2f)
-
-
-    fun getTopoYAtual(): Float = patoY
-
-    fun setModoPerigo() {
-        if (!estaEmPerigo) {
-            estaEmPerigo = true
-
-            val matrix = ColorMatrix()
-            matrix.setSaturation(0f)
-            patoPaint.colorFilter = ColorMatrixColorFilter(matrix)
-
-            intervaloFrameMs = 300
-
-            velocidadeX = if (velocidadeX > 0) 2f else -2f
-            velocidadeY = if (velocidadeY > 0) 2f else -2f
-
-            invalidate()
-        }
-    }
-
-    fun setModoNormal() {
-        if (estaEmPerigo) {
-            estaEmPerigo = false
-
-            patoPaint.colorFilter = null
-
-            intervaloFrameMs = 150
-
-            velocidadeX = if (velocidadeX > 0) 5f else -5f
-            velocidadeY = if (velocidadeY > 0) 5f else -5f
-
-            invalidate()
-        }
-    }
+    // Helpers usados pela PatoActivity para posicionar os corações/milhos
+    fun getCentroXAtual(): Float = posX + (larguraFrameReal / 2f)
+    fun getTopoYAtual(): Float = posY
 }
