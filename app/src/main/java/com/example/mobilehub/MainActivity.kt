@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnCalculadora = findViewById<Button>(R.id.btn_calculadora)
         val btnPato = findViewById<Button>(R.id.btn_pato)
+        val btnPomodoro = findViewById<Button>(R.id.btnPomodoro)
 
         btnCalculadora.setOnClickListener {
             val intent = Intent(this, CalculadoraActivity::class.java)
@@ -23,5 +24,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PatoActivity::class.java)
             startActivity(intent)
         }
+
+        btnPomodoro.setOnClickListener {
+            val intent = Intent(this, PomodoroActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

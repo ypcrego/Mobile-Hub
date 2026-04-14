@@ -30,6 +30,7 @@
             android:parentActivityName=".MainActivity"
             android:exported="false" />
 
+        <activity android:name=".PomodoroActivity" />
     </application>
 
 </manifest>

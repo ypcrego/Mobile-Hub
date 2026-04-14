@@ -19,8 +19,10 @@
     <string name="clear">Limpar tudo</string>
     <string name="backspace">Limpar algarismo</string>
     <string name="power">Potência</string>
-
-
+    <string name="lt_voltar"><![CDATA[< Voltar]]></string>
+    <string name="iniciar">Iniciar</string>
+    <string name="pausar">Pausar</string>
+    <string name="reset">Reiniciar</string>
 
 
 </resources>
