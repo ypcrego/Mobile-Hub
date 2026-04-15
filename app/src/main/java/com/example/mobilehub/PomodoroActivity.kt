@@ -192,6 +192,11 @@ class PomodoroActivity : AppCompatActivity() {
         viewModel.pauseTimer()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        audioManager.stopAmbience() 
+    }
+
 
 
 }

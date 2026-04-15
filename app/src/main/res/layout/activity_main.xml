@@ -6,159 +6,164 @@
     android:background="@color/bg_hub_light"
     android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/hub_padding"
-        android:gravity="center_horizontal">
+        android:padding="@dimen/hub_padding">
 
-        <include layout="@layout/layout_theme_toggle" />
+        <include
+            android:id="@+id/btnTema"
+            layout="@layout/layout_theme_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hub_title"
             android:textSize="@dimen/hub_title_size"
             android:textColor="@color/text_hub_title"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/large_dp"/>
+            android:layout_marginTop="@dimen/large_dp"
+            app:layout_constraintTop_toBottomOf="@id/btnTema"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
+            android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hub_subtitle"
             android:textSize="@dimen/hub_subtitle_size"
             android:textColor="@color/text_hub_subtitle"
-            android:layout_marginBottom="@dimen/large_dp"
-            android:layout_marginTop="@dimen/small_dp"/>
+            android:layout_marginTop="@dimen/small_dp"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:constraint_referenced_ids="card_pato,card_calculadora,card_pomodoro"
+            app:flow_wrapMode="aligned"
+            app:flow_horizontalGap="@dimen/normal_dp"
+            app:flow_verticalGap="@dimen/normal_dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/card_pato"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
-            <LinearLayout
-                android:id="@+id/card_pato"
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/app_icon_size"
+                android:layout_height="@dimen/app_icon_size"
+                app:cardBackgroundColor="@color/card_pato"
+                app:cardCornerRadius="@dimen/icon_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/preview_duck"
+                    android:scaleType="centerCrop"
+                    android:padding="0dp"
+                    android:contentDescription="@string/app_pato"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="@dimen/icon_margin"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/app_icon_size"
-                    android:layout_height="@dimen/app_icon_size"
-                    app:cardBackgroundColor="@color/card_pato"
-                    app:cardCornerRadius="@dimen/icon_corner_radius"
-                    app:cardElevation="@dimen/card_elevation">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/preview_duck"
-                        android:scaleType="centerCrop"
-                        android:padding="0dp"
-                        android:contentDescription="@string/app_pato"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_pato"
-                    android:textColor="@color/text_hub_title"
-                    android:textSize="@dimen/icon_label_size"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/small_dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/card_calculadora"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="@dimen/icon_margin"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/app_icon_size"
-                    android:layout_height="@dimen/app_icon_size"
-                    app:cardBackgroundColor="@color/card_gato"
-                    app:cardCornerRadius="@dimen/icon_corner_radius"
-                    app:cardElevation="@dimen/card_elevation">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/preview_calculator"
-                        android:scaleType="centerCrop"
-                        android:padding="0dp"
-                        android:contentDescription="@string/app_calc"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_calc"
-                    android:textColor="@color/text_hub_title"
-                    android:textSize="@dimen/icon_label_size"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/small_dp"/>
-            </LinearLayout>
-
+                android:text="@string/app_pato"
+                android:textColor="@color/text_hub_title"
+                android:textSize="@dimen/icon_label_size"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/small_dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/card_calculadora"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
 
-            <LinearLayout
-                android:id="@+id/card_pomodoro"
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/app_icon_size"
+                android:layout_height="@dimen/app_icon_size"
+                app:cardBackgroundColor="@color/card_gato"
+                app:cardCornerRadius="@dimen/icon_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/preview_calculator"
+                    android:scaleType="centerCrop"
+                    android:padding="0dp"
+                    android:contentDescription="@string/app_calc"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_margin="@dimen/icon_margin"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/app_icon_size"
-                    android:layout_height="@dimen/app_icon_size"
-                    app:cardBackgroundColor="@color/card_sapo"
-                    app:cardCornerRadius="@dimen/icon_corner_radius"
-                    app:cardElevation="@dimen/card_elevation">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/preview_frog"
-                        android:scaleType="centerCrop"
-                        android:padding="0dp"
-                        android:contentDescription="@string/app_pomo"/>
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_pomo"
-                    android:textColor="@color/text_hub_title"
-                    android:textSize="@dimen/icon_label_size"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/small_dp"/>
-            </LinearLayout>
-
+                android:text="@string/app_calc"
+                android:textColor="@color/text_hub_title"
+                android:textSize="@dimen/icon_label_size"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/small_dp"/>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/card_pomodoro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/app_icon_size"
+                android:layout_height="@dimen/app_icon_size"
+                app:cardBackgroundColor="@color/card_sapo"
+                app:cardCornerRadius="@dimen/icon_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/preview_frog"
+                    android:scaleType="centerCrop"
+                    android:padding="0dp"
+                    android:contentDescription="@string/app_pomo"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_pomo"
+                android:textColor="@color/text_hub_title"
+                android:textSize="@dimen/icon_label_size"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/small_dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

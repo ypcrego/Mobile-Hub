@@ -103,7 +103,7 @@ class PatoActivity : AppCompatActivity() {
         }
 
         val btnVoltar = findViewById<Button>(R.id.btn_voltar_hub)
-        btnVoltar.setTextColor(ContextCompat.getColor(this, R.color.text_hub_subtitle))
+        btnVoltar.setTextColor(ContextCompat.getColor(this, R.color.text_back))
 
         iniciarSonsAleatorios()
 
