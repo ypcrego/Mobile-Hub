@@ -1,11 +1,13 @@
 package com.example.mobilehub
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,7 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var rootLayout: ConstraintLayout
 
     private lateinit var audioManager: AudioManager
+
 
     // all spritesheets
     private fun getFrogSprites(): List<Int> {
@@ -49,12 +52,14 @@ class PomodoroActivity : AppCompatActivity() {
         btnReset = findViewById(R.id.btnResetTimer)
         frogContainer = findViewById(R.id.frogContainer)
         val isDay = isDaytime()
+        audioManager.startNightAmbience()
 
         // TODO frog
         if (isDay) {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp)
         } else {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
+            tvTimer.setTextColor(android.graphics.Color.WHITE)
         }
 
         // TODO frog
@@ -71,6 +76,11 @@ class PomodoroActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_voltar_hub).setOnClickListener {
             finish()
+        }
+
+        findViewById<ImageView>(R.id.btnSettings).setOnClickListener {
+            val intent = Intent(this, PomodoroSettingsActivity::class.java)
+            startActivity(intent)
         }
 
         setupObservers()
@@ -121,6 +131,22 @@ class PomodoroActivity : AppCompatActivity() {
         viewModel.alarmEvent.observe(this) {
             audioManager.playSound(EnumSound.ALARM_DROP)
         }
+
+        viewModel.isRunning.observe(this) { isRunning ->
+            val hasStarted = viewModel.hasStarted.value ?: false
+
+            if (isRunning) {
+                btnToggle.text = getString(R.string.pausar)
+            } else {
+                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+            }
+        }
+
+        viewModel.hasStarted.observe(this) { hasStarted ->
+            if (viewModel.isRunning.value == false) {
+                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -150,5 +176,17 @@ class PomodoroActivity : AppCompatActivity() {
             frogContainer.addView(frogView)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadPreferences()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.pauseTimer()
+    }
+
+
 
 }

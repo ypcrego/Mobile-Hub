@@ -14,6 +14,8 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
     private var isSoundsReady = false
     private var currentUiStreamId: Int = 0
 
+    private var nightAmbiencePlayer: MediaPlayer? = null
+
     private val appContext = context.applicationContext
 
     private val soundPoolConfig = mapOf(
@@ -86,6 +88,7 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
     override fun release() {
         soundPool.release()
         alarmPlayer?.release()
+        nightAmbiencePlayer?.release()
     }
     companion object {
         @Volatile
@@ -96,5 +99,22 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
                 instance ?: DefaultAudioManager(context).also { instance = it }
             }
         }
+    }
+
+    override fun startNightAmbience() {
+        // Se já estiver tocando, não faz nada
+        if (nightAmbiencePlayer?.isPlaying == true) return
+
+        nightAmbiencePlayer = MediaPlayer.create(appContext, R.raw.som_noite).apply {
+            isLooping = true
+            setVolume(0.8f, 0.8f) // Volume mais baixo para ser apenas um fundo
+            start()
+        }
+    }
+
+    override fun stopAmbience() {
+        nightAmbiencePlayer?.stop()
+        nightAmbiencePlayer?.release()
+        nightAmbiencePlayer = null
     }
 }

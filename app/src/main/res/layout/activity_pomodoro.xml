@@ -22,6 +22,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/btnSettings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="8dp"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Configurações" />
+
 <!--    <include-->
 <!--        layout="@layout/layout_theme_toggle"-->
 <!--        android:id="@+id/btnTema"-->
@@ -57,24 +69,36 @@
 
     <Button
         android:id="@+id/btnToggleTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
         android:text="@string/iniciar"
         android:fontFamily="@font/pixel_sproutlands"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnResetTimer" />
+        android:textColor="#5D4037"
+        android:textSize="16sp"
+        android:background="@drawable/button"
+    app:backgroundTint="@null"
+    android:stateListAnimator="@null"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/btnResetTimer" />
 
     <Button
         android:id="@+id/btnResetTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="32dp"
         android:text="@string/reset"
         android:fontFamily="@font/pixel_sproutlands"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnToggleTimer"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="#5D4037"
+        android:textSize="16sp"
+    android:background="@drawable/button"
+    app:backgroundTint="@null"
+    android:stateListAnimator="@null"
+
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btnToggleTimer"
+    app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

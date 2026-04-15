@@ -31,6 +31,11 @@
             android:exported="false" />
 
         <activity android:name=".PomodoroActivity" />
+
+        <activity
+            android:name=".PomodoroSettingsActivity"
+            android:theme="@style/Theme.PomodoroSettings"
+            android:exported="false" />
     </application>
 
 </manifest>

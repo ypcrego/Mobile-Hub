@@ -11,6 +11,7 @@ class FrogView(context: Context, spriteResId: Int) : BaseSpriteView(context) {
     private val totalCols = 8
     private val scaleFactor = 6
 
+
     init {
         val sheet = BitmapFactory.decodeResource(resources, spriteResId)
         val helper = SpriteSheetHelper(sheet, totalRows, totalCols)
