@@ -63,6 +63,8 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
         spawnIntervalMs = if (totalTimeMs > 0) totalTimeMs / totalFrogsToSpawn else 1000L
 
         updateTimeText(timeRemainingMs)
+
+        _hasStarted.value = false
     }
 
     fun toggleTimer() {
