@@ -1,11 +1,13 @@
 package com.example.mobilehub
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,7 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var rootLayout: ConstraintLayout
 
     private lateinit var audioManager: AudioManager
+
 
     // all spritesheets
     private fun getFrogSprites(): List<Int> {
@@ -48,18 +51,21 @@ class PomodoroActivity : AppCompatActivity() {
         btnToggle = findViewById(R.id.btnToggleTimer)
         btnReset = findViewById(R.id.btnResetTimer)
         frogContainer = findViewById(R.id.frogContainer)
+        val isDay = isDaytime()
+        audioManager.startNightAmbience()
 
         // TODO frog
-        val isNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-        if (isNightMode) {
-            rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
-        } else {
+        if (isDay) {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp)
+        } else {
+            rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
+            tvTimer.setTextColor(android.graphics.Color.WHITE)
         }
 
         // TODO frog
         findViewById<View>(R.id.btnTema)?.setOnClickListener {
-            if (isNightMode) {
+            val currentMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            if (currentMode == Configuration.UI_MODE_NIGHT_YES) {
                 audioManager.playSound(EnumSound.CAT_DAY)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             } else {
@@ -72,8 +78,18 @@ class PomodoroActivity : AppCompatActivity() {
             finish()
         }
 
+        findViewById<ImageView>(R.id.btnSettings).setOnClickListener {
+            val intent = Intent(this, PomodoroSettingsActivity::class.java)
+            startActivity(intent)
+        }
+
         setupObservers()
         setupListeners()
+    }
+
+    private fun isDaytime(): Boolean {
+        val hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY)
+        return hour in 6..17 // 06:00 às 17:59
     }
 
     private fun setupObservers() {
@@ -92,17 +108,44 @@ class PomodoroActivity : AppCompatActivity() {
         viewModel.croakEvent.observe(this) {
             val frogQuantity = frogContainer.childCount
 
+            // Lista com os seus novos sons de sapo
+            val frogSounds = listOf(
+                EnumSound.SOM_SAPO_1,
+                EnumSound.SOM_SAPO_2,
+                EnumSound.SOM_SAPO_3,
+                EnumSound.SOM_SAPO_4
+            )
+
             for (i in 0 until frogQuantity) {
-                val delayMs = kotlin.random.Random.nextLong(0, 1000)
+                // Sorteia um delay entre 0 e 2 segundos para cada sapo
+                val delayMs = kotlin.random.Random.nextLong(0, 2000)
+                // Sorteia qual dos 4 sons esse sapo específico vai emitir
+                val randomSound = frogSounds.random()
 
                 frogContainer.postDelayed({
-                    audioManager.playSound(EnumSound.FROG_CROAK)
+                    audioManager.playSound(randomSound)
                 }, delayMs)
             }
         }
 
         viewModel.alarmEvent.observe(this) {
             audioManager.playSound(EnumSound.ALARM_DROP)
+        }
+
+        viewModel.isRunning.observe(this) { isRunning ->
+            val hasStarted = viewModel.hasStarted.value ?: false
+
+            if (isRunning) {
+                btnToggle.text = getString(R.string.pausar)
+            } else {
+                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+            }
+        }
+
+        viewModel.hasStarted.observe(this) { hasStarted ->
+            if (viewModel.isRunning.value == false) {
+                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+            }
         }
     }
 
@@ -133,5 +176,17 @@ class PomodoroActivity : AppCompatActivity() {
             frogContainer.addView(frogView)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadPreferences()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.pauseTimer()
+    }
+
+
 
 }

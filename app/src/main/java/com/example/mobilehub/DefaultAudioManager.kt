@@ -14,12 +14,17 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
     private var isSoundsReady = false
     private var currentUiStreamId: Int = 0
 
+    private var nightAmbiencePlayer: MediaPlayer? = null
+
     private val appContext = context.applicationContext
 
     private val soundPoolConfig = mapOf(
         EnumSound.CAT_DAY to R.raw.som_gato_dia,
         EnumSound.CAT_NIGHT to R.raw.som_gato_noite,
-        EnumSound.FROG_CROAK to R.raw.som_gato_dia, // TODO real frog sound
+        EnumSound.SOM_SAPO_1 to R.raw.som_sapo_1,
+        EnumSound.SOM_SAPO_2 to R.raw.som_sapo_2,
+        EnumSound.SOM_SAPO_3 to R.raw.som_sapo_3,
+        EnumSound.SOM_SAPO_4 to R.raw.som_sapo_4,
         EnumSound.RANDOM_QUACK to R.raw.random_quack,
         EnumSound.QUACK_DROP to R.raw.quack_drop,
     )
@@ -83,6 +88,7 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
     override fun release() {
         soundPool.release()
         alarmPlayer?.release()
+        nightAmbiencePlayer?.release()
     }
     companion object {
         @Volatile
@@ -93,5 +99,22 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
                 instance ?: DefaultAudioManager(context).also { instance = it }
             }
         }
+    }
+
+    override fun startNightAmbience() {
+        // Se já estiver tocando, não faz nada
+        if (nightAmbiencePlayer?.isPlaying == true) return
+
+        nightAmbiencePlayer = MediaPlayer.create(appContext, R.raw.som_noite).apply {
+            isLooping = true
+            setVolume(0.8f, 0.8f) // Volume mais baixo para ser apenas um fundo
+            start()
+        }
+    }
+
+    override fun stopAmbience() {
+        nightAmbiencePlayer?.stop()
+        nightAmbiencePlayer?.release()
+        nightAmbiencePlayer = null
     }
 }

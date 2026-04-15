@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="350dp"
+        android:minHeight="700dp"
+        android:background="@drawable/modal"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="220dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="60dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/pixel_sproutlands"
+                android:text="Configuracoes"
+                android:textColor="#5D4037"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/btnCloseSettings"
+                android:layout_width="48dp"  android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/frame_close"
+                android:contentDescription="Fechar" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tempo de Foco:"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:fontFamily="@font/pixel_sproutlands"
+            android:textColor="#795548"
+            android:layout_gravity="start" />
+
+        <EditText
+            android:id="@+id/etFocusTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: 25"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#22000000"
+            android:padding="8dp"
+            android:textColorHint="#995D4037"
+            android:inputType="number"
+            android:textColor="#5D4037"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Tempo de Pausa:"
+            android:textSize="12sp"
+            android:fontFamily="@font/pixel_sproutlands"
+            android:textColor="#795548"
+            android:layout_gravity="start" />
+
+        <EditText
+            android:id="@+id/etBreakTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: 5"
+            android:layout_marginTop="5dp"
+            android:background="#22000000"
+            android:padding="8dp"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="#995D4037"
+            android:inputType="number"
+            android:textColor="#5D4037"
+            android:layout_marginBottom="5dp" />
+
+        <Button
+            android:id="@+id/btnSaveSettings"
+            android:layout_width="160dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_click_selector"
+            android:text="Salvar"
+            app:backgroundTint="@null"
+            android:textColor="#5D4037"
+            android:fontFamily="@font/pixel_sproutlands"
+            android:textSize="18sp"
+            android:stateListAnimator="@null"
+            android:padding="0dp" />
+
+    </LinearLayout>
+
+</FrameLayout>
