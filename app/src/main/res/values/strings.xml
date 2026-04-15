@@ -34,5 +34,6 @@
 
     <string name="app_pomo">Pomodoro Sapo</string>
     <string name="desc_pomo">"Para momentos de "foco"</string>
+    <string name="continuar">Continuar</string>
 
 </resources>

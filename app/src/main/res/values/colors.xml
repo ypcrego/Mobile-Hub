@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <color name="display_bg">#DBCBB3</color>
     <color name="display_text">#3E2723</color>
@@ -10,10 +11,13 @@
     <color name="btn_text">#FDF6ED</color>
 
     <color name="bg_hub_light">#FFF9F2</color>
-    <color name="text_hub_title">#3E2723</color> <color name="text_hub_subtitle">#5D4037</color>
+    <color name="text_hub_title">#3E2723</color>
+    <color name="text_hub_subtitle">#5D4037</color>
 
     <color name="card_pato">#FFECB3</color>
     <color name="card_gato">#E1BEE7</color>
     <color name="card_sapo">#C8E6C9</color>
     <color name="text_card_dark">#212121</color>
+
+    <color name="verde_floresta">#1B5E20</color>
 </resources>

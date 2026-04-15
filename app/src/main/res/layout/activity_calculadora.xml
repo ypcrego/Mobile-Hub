@@ -10,18 +10,10 @@
     android:paddingStart="@dimen/calculator_padding"
     android:paddingEnd="@dimen/calculator_padding">
 
-    <Button
-        android:id="@+id/btn_voltar_hub"
+    <include
+        layout="@layout/layout_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lt_voltar"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/pixel_sproutlands"
-        android:minWidth="@dimen/zero_dp"
-        android:minHeight="@dimen/zero_dp"
-        android:padding="@dimen/small_dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

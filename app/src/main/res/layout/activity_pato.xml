@@ -2,24 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_grama_repeat">
 
-    <Button
+    <include
         android:id="@+id/btn_voltar_hub"
+        layout="@layout/layout_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/small_dp"
-        android:layout_marginTop="@dimen/small_dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/pixel_sproutlands"
-        android:minWidth="@dimen/zero_dp"
-        android:minHeight="@dimen/zero_dp"
-        android:padding="@dimen/twelve_dp"
-        android:text="@string/lt_voltar"
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:layout_marginTop="@dimen/normal_dp" />
 
     <LinearLayout
         android:id="@+id/header"

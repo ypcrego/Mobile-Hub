@@ -16,19 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <include
         android:id="@+id/btn_voltar_hub"
+        layout="@layout/layout_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&lt; Voltar"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/pixel_sproutlands"
-        android:minWidth="@dimen/zero_dp"
-        android:minHeight="@dimen/zero_dp"
-        android:padding="@dimen/normal_dp"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/small_dp"
+        app:layout_constraintTop_toTopOf="@+id/btnSettings"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSettings"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView

@@ -18,6 +18,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 
 class PatoActivity : AppCompatActivity() {
 
@@ -100,6 +101,9 @@ class PatoActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_voltar_hub).setOnClickListener {
             finish()
         }
+
+        val btnVoltar = findViewById<Button>(R.id.btn_voltar_hub)
+        btnVoltar.setTextColor(ContextCompat.getColor(this, R.color.text_hub_subtitle))
 
         iniciarSonsAleatorios()
 

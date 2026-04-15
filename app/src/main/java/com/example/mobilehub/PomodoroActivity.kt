@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import kotlin.random.Random
 
 class PomodoroActivity : AppCompatActivity() {
@@ -58,12 +59,12 @@ class PomodoroActivity : AppCompatActivity() {
         // TODO frog
         if (isDay) {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp)
-            val verdeFloresta = android.graphics.Color.parseColor("#1B5E20")
+            val verdeFloresta = ContextCompat.getColor(this, R.color.verde_floresta)
             btnVoltar.setTextColor(verdeFloresta)
-            tvTimer.setTextColor(android.graphics.Color.parseColor("#1B5E20"))
+            tvTimer.setTextColor(verdeFloresta)
         } else {
-            rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
-            tvTimer.setTextColor(android.graphics.Color.WHITE)
+            rootLayout.setBackgroundResource(R.drawable.bg_swamp)
+            tvTimer.setTextColor(ContextCompat.getColor(this, R.color.white))
         }
 
         // TODO frog
@@ -142,13 +143,13 @@ class PomodoroActivity : AppCompatActivity() {
             if (isRunning) {
                 btnToggle.text = getString(R.string.pausar)
             } else {
-                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+                btnToggle.text = if (hasStarted) getString(R.string.continuar) else getString(R.string.iniciar)
             }
         }
 
         viewModel.hasStarted.observe(this) { hasStarted ->
             if (viewModel.isRunning.value == false) {
-                btnToggle.text = if (hasStarted) "Continuar" else getString(R.string.iniciar)
+                btnToggle.text = if (hasStarted) getString(R.string.continuar) else getString(R.string.iniciar)
             }
         }
     }

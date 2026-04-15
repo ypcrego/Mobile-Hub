@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_voltar_hub"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/lt_voltar"
+    android:background="@color/transparent"
+    android:fontFamily="@font/pixel_sproutlands"
+    android:minWidth="@dimen/zero_dp"
+    android:minHeight="@dimen/zero_dp"
+    android:padding="@dimen/small_dp"
+    android:textColor="@color/white"
+    android:textSize="14sp" />
