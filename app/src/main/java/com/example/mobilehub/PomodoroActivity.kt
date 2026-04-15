@@ -90,6 +90,12 @@ class PomodoroActivity : AppCompatActivity() {
 
         setupObservers()
         setupListeners()
+
+        frogContainer.post {
+            for (i in 0 until viewModel.frogsSpawned) {
+                spawnRandomFrog()
+            }
+        }
     }
 
     private fun isDaytime(): Boolean {
@@ -194,7 +200,7 @@ class PomodoroActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        audioManager.stopAmbience() 
+        audioManager.stopAmbience()
     }
 
 

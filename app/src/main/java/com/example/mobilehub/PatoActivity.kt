@@ -107,6 +107,12 @@ class PatoActivity : AppCompatActivity() {
 
         iniciarSonsAleatorios()
 
+        if (savedInstanceState != null) {
+            nivelFome = savedInstanceState.getInt("fome", 100)
+            nivelFelicidade = savedInstanceState.getInt("felicidade", 100)
+            estaVivo = savedInstanceState.getBoolean("vivo", true)
+        }
+
         iniciarCicloVida()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -266,6 +272,13 @@ class PatoActivity : AppCompatActivity() {
         super.onDestroy()
         handler.removeCallbacksAndMessages(null)
         handlerSom.removeCallbacksAndMessages(null)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("fome", nivelFome)
+        outState.putInt("felicidade", nivelFelicidade)
+        outState.putBoolean("vivo", estaVivo)
     }
 
 

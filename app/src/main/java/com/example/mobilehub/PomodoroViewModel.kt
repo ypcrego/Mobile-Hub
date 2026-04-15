@@ -19,7 +19,8 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
 
     private var timer: CountDownTimer? = null
     private var timeRemainingMs = totalTimeMs
-    private var frogsSpawned = 0
+    var frogsSpawned = 0
+        private set
 
     private val _timeString = MutableLiveData<String>()
     val timeString: LiveData<String> get() = _timeString
