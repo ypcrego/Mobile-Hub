@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_land"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:paddingStart="40dp"
-    android:paddingEnd="40dp">
+    android:paddingTop="@dimen/normal_dp"
+    android:paddingBottom="@dimen/normal_dp"
+    android:paddingStart="@dimen/calculator_padding"
+    android:paddingEnd="@dimen/calculator_padding">
 
     <TextView
         android:id="@+id/txtResultado"
         style="@style/CalculatorDisplay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="12dp"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="@dimen/zero_dp"
+        android:padding="@dimen/twelve_dp"
         android:text="0"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/gridButtons"
@@ -29,8 +29,8 @@
 
     <GridLayout
         android:id="@+id/gridButtons"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="@dimen/zero_dp"
         android:rowCount="5"
         android:columnCount="6"
         app:layout_constraintVertical_weight="2"
