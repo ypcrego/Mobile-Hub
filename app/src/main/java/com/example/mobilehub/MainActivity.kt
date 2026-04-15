@@ -3,11 +3,10 @@ package com.example.mobilehub
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.cardview.widget.CardView
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,9 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         btnTema = findViewById(R.id.btnTema)
 
-        val cardPato = findViewById<CardView>(R.id.card_pato)
-        val cardCalculadora = findViewById<CardView>(R.id.card_calculadora)
-        val cardPomodoro = findViewById<CardView>(R.id.card_pomodoro)
+        val cardPato = findViewById<View>(R.id.card_pato)
+        val cardCalculadora = findViewById<View>(R.id.card_calculadora)
+        val cardPomodoro = findViewById<View>(R.id.card_pomodoro)
 
 
         btnTema.setOnClickListener {
