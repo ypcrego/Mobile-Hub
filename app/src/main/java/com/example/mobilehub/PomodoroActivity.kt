@@ -53,10 +53,14 @@ class PomodoroActivity : AppCompatActivity() {
         frogContainer = findViewById(R.id.frogContainer)
         val isDay = isDaytime()
         audioManager.startNightAmbience()
+        val btnVoltar = findViewById<Button>(R.id.btn_voltar_hub)
 
         // TODO frog
         if (isDay) {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp)
+            val verdeFloresta = android.graphics.Color.parseColor("#1B5E20")
+            btnVoltar.setTextColor(verdeFloresta)
+            tvTimer.setTextColor(android.graphics.Color.parseColor("#1B5E20"))
         } else {
             rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
             tvTimer.setTextColor(android.graphics.Color.WHITE)
@@ -179,7 +183,7 @@ class PomodoroActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadPreferences()
+        viewModel.loadPreferences(forceReset = false)
     }
 
     override fun onPause() {

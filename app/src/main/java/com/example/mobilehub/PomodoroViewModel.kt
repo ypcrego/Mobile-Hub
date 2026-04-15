@@ -48,23 +48,30 @@ class PomodoroViewModel(application: Application) : AndroidViewModel(application
     }
 
     // Função para carregar os tempos salvos pelo usuário
-    fun loadPreferences() {
-        // Se o timer estiver rodando, não atualizamos para não dar salto no relógio
+    fun loadPreferences(forceReset: Boolean = true) {
+        // Se o timer estiver rodando, não fazemos nada para evitar bugs
         if (_isRunning.value == true) return
 
         val focusMinutes = prefs.getInt("focus_time", 25)
         val breakMinutes = prefs.getInt("break_time", 5)
 
-        // Define qual tempo carregar baseado no modo atual
         val minutes = if (_isFocusMode.value == true) focusMinutes else breakMinutes
-
         totalTimeMs = minutes * 60 * 1000L
-        timeRemainingMs = totalTimeMs
+
+        // LÓGICA DE DECISÃO:
+        if (forceReset) {
+            // Se for um reset forçado (Botão Reset ou Initial Load), volta ao início
+            timeRemainingMs = totalTimeMs
+            _hasStarted.value = false
+            updateTimeText(timeRemainingMs)
+        } else {
+            // Se NÃO for forçado (voltou pelo botão Close),
+            // apenas recalculamos o intervalo dos sapos baseado no novo tempo total,
+            // mas MANTEREMOS o timeRemainingMs atual.
+            updateTimeText(timeRemainingMs)
+        }
+
         spawnIntervalMs = if (totalTimeMs > 0) totalTimeMs / totalFrogsToSpawn else 1000L
-
-        updateTimeText(timeRemainingMs)
-
-        _hasStarted.value = false
     }
 
     fun toggleTimer() {
