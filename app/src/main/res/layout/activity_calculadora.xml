@@ -14,7 +14,7 @@
         android:id="@+id/btn_voltar_hub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="&lt; Voltar"
+        android:text="@string/lt_voltar"
         android:background="@android:color/transparent"
         android:fontFamily="@font/pixel_sproutlands"
         android:minWidth="@dimen/zero_dp"
