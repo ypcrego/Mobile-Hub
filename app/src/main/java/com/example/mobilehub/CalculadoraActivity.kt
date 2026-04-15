@@ -163,7 +163,7 @@ class CalculadoraActivity : AppCompatActivity() {
             "×" -> a * b
             "^" -> a.pow(b)
             "÷" -> if (b == 0.0) {
-                Toast.makeText(this, "Apesar da fome, você ainda não pode dividir por zero.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Apesar da fome por conhecimento, você ainda não pode dividir por zero.", Toast.LENGTH_SHORT).show()
                 a
             } else a / b
             else -> b
@@ -240,7 +240,6 @@ class CalculadoraActivity : AppCompatActivity() {
     private fun fixPixelArt(vararg ids: Int) {
         for (id in ids) {
             val view = findViewById<View>(id)
-            // Tenta tratar como ImageView (ImageButton). Se não for, não faz nada e evita o crash.
             (view as? ImageView)?.let { imgView ->
                 (imgView.drawable as? BitmapDrawable)?.isFilterBitmap = false
             }
