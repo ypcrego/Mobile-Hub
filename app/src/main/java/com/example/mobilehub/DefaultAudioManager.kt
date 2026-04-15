@@ -19,7 +19,10 @@ class DefaultAudioManager private constructor(context: Context) : AudioManager {
     private val soundPoolConfig = mapOf(
         EnumSound.CAT_DAY to R.raw.som_gato_dia,
         EnumSound.CAT_NIGHT to R.raw.som_gato_noite,
-        EnumSound.FROG_CROAK to R.raw.som_gato_dia, // TODO real frog sound
+        EnumSound.SOM_SAPO_1 to R.raw.som_sapo_1,
+        EnumSound.SOM_SAPO_2 to R.raw.som_sapo_2,
+        EnumSound.SOM_SAPO_3 to R.raw.som_sapo_3,
+        EnumSound.SOM_SAPO_4 to R.raw.som_sapo_4,
         EnumSound.RANDOM_QUACK to R.raw.random_quack,
         EnumSound.QUACK_DROP to R.raw.quack_drop,
     )
