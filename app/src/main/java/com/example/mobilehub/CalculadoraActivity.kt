@@ -182,6 +182,11 @@ class CalculadoraActivity : AppCompatActivity() {
             else -> value
         }
 
+        if (result.isNaN() || result.isInfinite()) {
+            Toast.makeText(this, "Operação miautemática inválida para este número.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         currentInput = result.toString()
         if (operand == value) {
             operand = null

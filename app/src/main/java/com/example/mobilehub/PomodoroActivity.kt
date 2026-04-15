@@ -63,7 +63,7 @@ class PomodoroActivity : AppCompatActivity() {
             btnVoltar.setTextColor(verdeFloresta)
             tvTimer.setTextColor(verdeFloresta)
         } else {
-            rootLayout.setBackgroundResource(R.drawable.bg_swamp)
+            rootLayout.setBackgroundResource(R.drawable.bg_swamp_night)
             tvTimer.setTextColor(ContextCompat.getColor(this, R.color.white))
         }
 
