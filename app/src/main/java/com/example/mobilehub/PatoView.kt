@@ -70,6 +70,7 @@ class PatoView(context: Context, attrs: AttributeSet?) : BaseSpriteView(context,
         this.frames = walkFrames
         this.posX = 100f
         this.posY = 100f
+        this.retomar()
         invalidate()
     }
 

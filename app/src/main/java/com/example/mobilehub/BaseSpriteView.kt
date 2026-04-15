@@ -29,16 +29,22 @@ abstract class BaseSpriteView(context: Context, attrs: AttributeSet? = null) : V
     }
     protected val dstRect = Rect()
 
-    // Lista de bitmaps/frames que a classe filha vai preencher
-    protected var frames = listOf<Bitmap>()
+    protected var frames: List<Bitmap> = emptyList()
+        set(value) {
+            field = value
+            frameAtual = 0 // Always reset to the first frame when the animation changes
+        }
+
     protected var larguraFrameReal = 0
     protected var alturaFrameReal = 0
 
     // loop comum de animação
     private val loop = object : Runnable {
         override fun run() {
-            if (!estaVivo) return
-            atualizarFisicaEAnimacao()
+            if (estaVivo) {
+                atualizarFisicaEAnimacao()
+            }
+
             invalidate()
             postOnAnimation(this)
         }
@@ -89,6 +95,11 @@ abstract class BaseSpriteView(context: Context, attrs: AttributeSet? = null) : V
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (frames.isEmpty()) return
+
+        // Safety check to prevent any lingering index issues before the draw
+        if (frameAtual >= frames.size) {
+            frameAtual = 0
+        }
 
         val frame = frames[frameAtual]
         dstRect.set(posX.toInt(), posY.toInt(), (posX + larguraFrameReal).toInt(), (posY + alturaFrameReal).toInt())

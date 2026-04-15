@@ -23,6 +23,16 @@
     <string name="iniciar">Iniciar</string>
     <string name="pausar">Pausar</string>
     <string name="reset">Reiniciar</string>
+    <string name="hub_title">Animal Hub</string>
+    <string name="hub_subtitle">Quem vai te acompanhar hoje?</string>
 
+    <string name="app_pato">Patogotchi</string>
+    <string name="desc_pato">Pato. Gotchi!</string>
+
+    <string name="app_calc">Calculadora</string>
+    <string name="desc_calc">Meowtemática</string>
+
+    <string name="app_pomo">Pomodoro Sapo</string>
+    <string name="desc_pomo">"Para momentos de "foco"</string>
 
 </resources>

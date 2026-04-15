@@ -18,8 +18,8 @@
     <style name="Theme.Calculadora" parent="Base.Theme.Calculadora" />
 
     <style name="PetCalcButton" parent="Widget.Material3.Button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">@dimen/zero_dp</item>
+        <item name="android:layout_height">@dimen/zero_dp</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
         <item name="android:layout_margin">@dimen/button_margin</item>
@@ -34,22 +34,22 @@
     </style>
 
     <style name="IconButton" parent="">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">@dimen/zero_dp</item>
+        <item name="android:layout_height">@dimen/zero_dp</item>
         <item name="android:layout_columnWeight">1</item>
         <item name="android:layout_rowWeight">1</item>
         <item name="android:layout_margin">@dimen/button_margin</item>
 
         <item name="android:background">@android:color/transparent</item>
         <item name="android:scaleType">fitCenter</item>
-        <item name="android:padding">4dp</item>
+        <item name="android:padding">@dimen/extra_small_dp</item>
     </style>
 
     <style name="CalculatorDisplay">
         <item name="android:gravity">bottom|end</item>
         <item name="android:textColor">@color/display_text</item>
         <item name="android:background">@drawable/bg_display_rounded</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_margin">@dimen/small_dp</item>
         <item name="android:fontFamily">@font/pixel_sproutlands</item>
     </style>
 
