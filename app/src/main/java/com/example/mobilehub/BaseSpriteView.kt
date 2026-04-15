@@ -19,6 +19,8 @@ abstract class BaseSpriteView(context: Context, attrs: AttributeSet? = null) : V
     abstract val naturalmenteOlhaParaDireita: Boolean
     protected var estaVivo = true
 
+    public var isPausado = false
+
     protected var frameAtual = 0
     protected var tempoUltimoFrame = 0L
     protected var intervaloFrameMs = 150L
@@ -41,7 +43,7 @@ abstract class BaseSpriteView(context: Context, attrs: AttributeSet? = null) : V
     // loop comum de animação
     private val loop = object : Runnable {
         override fun run() {
-            if (estaVivo) {
+            if (estaVivo && !isPausado) {
                 atualizarFisicaEAnimacao()
             }
 
@@ -72,7 +74,7 @@ abstract class BaseSpriteView(context: Context, attrs: AttributeSet? = null) : V
         posX += velX
         posY += velY
 
-        // Lógica de colisão genérica
+        // Lógica de colisão
         if (posX + larguraFrameReal > width) {
             posX = (width - larguraFrameReal).toFloat()
             velX = -Math.abs(velX)

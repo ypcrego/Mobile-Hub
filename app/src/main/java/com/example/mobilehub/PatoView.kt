@@ -48,15 +48,17 @@ class PatoView(context: Context, attrs: AttributeSet?) : BaseSpriteView(context,
         matrix.setSaturation(0f)
         this.paint.colorFilter = ColorMatrixColorFilter(matrix)
         this.intervaloFrameMs = 300L
-        this.velX = if (velX > 0) 2f else -2f
-        this.velY = if (velY > 0) 2f else -2f
+        val novaVel = 2f
+        this.velX = if (this.velX >= 0) novaVel else -novaVel
+        this.velY = if (this.velY >= 0) novaVel else -novaVel
     }
 
     fun setModoNormal() {
         this.paint.colorFilter = null
         this.intervaloFrameMs = 150L
-        this.velX = if (velX > 0) 5f else -5f
-        this.velY = if (velY > 0) 5f else -5f
+        val novaVel = 5f
+        this.velX = if (this.velX >= 0) novaVel else -novaVel
+        this.velY = if (this.velY >= 0) novaVel else -novaVel
     }
 
     fun notificarMorte() {
@@ -75,13 +77,11 @@ class PatoView(context: Context, attrs: AttributeSet?) : BaseSpriteView(context,
     }
 
     fun pausar() {
-        this.velX = 0f
-        this.velY = 0f
+        this.isPausado = true
     }
 
     fun retomar() {
-        this.velX = if (indoParaDireita) 5f else -5f
-        this.velY = 5f
+        this.isPausado = false
     }
 
     // Helpers usados pela PatoActivity para posicionar os corações/milhos
